@@ -36,15 +36,12 @@ const api = {
 
         await axios.post(BASE_URL + POST_URL, formData, {
             params: {
-                token: token
+                token: TOKEN
             },
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
+            headers: formData.getHeaders()
+        
         }).then(response => {
-            responseJson = response.data;
-            console.log('responseJson',responseJson);
-            output = true;
+            output = response.data;
         }).catch((error) => {
             console.error(error.response.headers);
             console.error(error.response.data);

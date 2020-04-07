@@ -34,8 +34,9 @@ require('dotenv').config();
             console.log('3 - Arquivo atualizado com sucesso');
         }
         
-        if ( await Api.enviaArquivo() ) {
-            console.log('4 - Arquivo enviado com sucesso');
+        const response = await Api.enviaArquivo();
+        if ( response ) {
+            console.log('4 - Arquivo enviado com sucesso, score: ' +response.score);
         }
 
     }catch(error){
