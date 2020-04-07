@@ -1,0 +1,19 @@
+{
+  "name": "Codenation",
+  "version": "1.0.0",
+  "description": "Desafio de programação da Codenation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/index.js"
+  },
+  "keywords": [
+    "Desafio Codenation"
+  ],
+  "author": "Leandro Gonçalves",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0"
+  }
+}
