@@ -1,8 +1,7 @@
-const axios = require('axios');
-const BASE_URL = 'https://api.codenation.dev';
 const Database = require('./database');
 const Decripty = require('./decrypt');
-const crypto = require('crypto');
+const Api = require('./api');
+const Crypto = require('crypto');
 require('dotenv').config();
 
 (async ()=>{
@@ -14,16 +13,8 @@ require('dotenv').config();
         
         if (token) {
             
-            await axios.get(BASE_URL + '/v1/challenge/dev-ps/generate-data',{
-                params: {
-                    token: token
-                }
-            }).then(response => {
-                responseJson = response.data;
-            }).catch((error) => {
-                console.log(error);
-            });
-            
+            responseJson = await Api.obterDados();
+
             if (await Database.escreverArquivo(responseJson)) {
                 console.log('1 - Arquivo escrito com sucesso');
             }
@@ -37,17 +28,18 @@ require('dotenv').config();
             console.log('2 - Texto decifrado com sucesso');
         }
         
-        jsonData.resumo_criptografico = crypto.createHash('sha1').update(jsonData.decifrado).digest('hex');
+        jsonData.resumo_criptografico = Crypto.createHash('sha1').update(jsonData.decifrado).digest('hex');
         
         if( await Database.escreverArquivo(jsonData) ){
             console.log('3 - Arquivo atualizado com sucesso');
         }
         
-        console.log(jsonData);
+        if ( await Api.enviaArquivo() ) {
+            console.log('4 - Arquivo enviado com sucesso');
+        }
 
     }catch(error){
         console.error(error);
-        
     }
     
     

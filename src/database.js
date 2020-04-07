@@ -1,4 +1,4 @@
-const { writeFile, readFile } = require('fs');
+const { writeFile, readFile, createReadStream } = require('fs');
 const { promisify } = require('util');
 const [writeFileAsync, readFileAsync] = [
     promisify(writeFile),
@@ -15,11 +15,14 @@ class Database {
         return true;
     }
     
-    async obterArquivo() {
+    async obterArquivo(string = true) {
         const arquivo = await readFileAsync(this.FILENAME);
         return JSON.parse(arquivo.toString());
     }
     
+    obterUploadStream() {
+        return createReadStream(this.FILENAME);
+    }
 }
 
 module.exports = new Database();

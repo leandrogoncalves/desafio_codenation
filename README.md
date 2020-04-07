@@ -5,9 +5,12 @@
 ##### Instalção
 
 ```
-git clone
+git clone git@github.com:leandrogoncalves/desafio_codenation.git
 ```
 
+```
+cd desafio_codenation
+```
 
 ```
 npm install
